@@ -745,6 +745,44 @@ export function DashboardSection() {
     );
   }, [vanneOpen, addLog, locIdx, fuel]);
 
+  const restartSimulation = useCallback(() => {
+    // Reset all simulation states to initial values
+    setFuel(87.0);
+    setPrevFuel(87.0);
+    setVanneOpen(false);
+    setLocked(false);
+    setLeakActive(false);
+    setLeakAcked(false);
+    setLocIdx(2);
+    setGpsIndex(2);
+    setCctvVideo(CCTV_VIDEOS[0]);
+    setLogs([]);
+    setRfidStatus(["auth", "auth", "auth", "block"]);
+    setIntrusion(false);
+    setAtTerminal([
+      "SIM800L Ready",
+      "Call Ready - SMS Ready",
+      "Network: Tunisie Telecom - Signal: 18/31",
+    ]);
+    setFuelHistory(() => {
+      const arr: number[] = [];
+      for (let i = 0; i < 25; i++) {
+        arr.push(+(87 + Math.random() * 1.5 - 0.5).toFixed(2));
+      }
+      return arr;
+    });
+    setVanneHistory(() => new Array(25).fill(0));
+    setTimeLabels(() => {
+      const arr: string[] = [];
+      for (let i = 0; i < 25; i++) {
+        const t = new Date(Date.now() - (24 - i) * 4000);
+        arr.push(pad(t.getMinutes()) + ":" + pad(t.getSeconds()));
+      }
+      return arr;
+    });
+    addLog('<span style="color:#22c55e">Simulation restarted - all systems reset</span>');
+  }, [addLog]);
+
   const sendSMS = useCallback(() => {
     setAtTerminal((prev) => [...prev, '>> AT+CMGS="+21655000000"']);
     setTimeout(() => {
@@ -1142,6 +1180,7 @@ export function DashboardSection() {
               <Card span={3} title="Event Log" status="live">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
                   <div className="flex gap-2">
+                    <button onClick={restartSimulation} className="cmd-btn text-[10px] py-1.5">RESTART SIM</button>
                     <button onClick={simRFIDOK} className="cmd-btn text-[10px] py-1.5">SIM RFID OK</button>
                     <button onClick={simNoRFID} className="cmd-btn text-[10px] py-1.5">SIM NO RFID</button>
                     <button onClick={simLeak} className="cmd-btn text-[10px] py-1.5">SIM LEAK</button>

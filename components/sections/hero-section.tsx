@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowDown, Radio, Shield, MapPin, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 
 const TankerScene = dynamic(
   () => import("@/components/three/tanker-scene").then((mod) => mod.TankerScene),
@@ -50,12 +51,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-balance"
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.0] text-foreground text-glow-primary"
           >
-            <span className="text-foreground">Intelligent</span>{" "}
-            <span className="text-primary text-glow-primary">IoT-Based</span>
-            <br />
-            <span className="text-foreground">Fuel Transport Security</span>
+            Intelligent IoT-Based Fuel Transport Security
           </motion.h1>
 
           {/* Subtitle */}
@@ -63,11 +61,31 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-8"
           >
             Real-time monitoring, fraud detection, and GPS tracking for modern fuel transport.
             Securing every drop from origin to destination.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
+          >
+            <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">GPS Tracking</div>
+              <div className="text-xl font-semibold text-foreground">Location Lock</div>
+            </div>
+            <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Fuel Monitoring</div>
+              <div className="text-xl font-semibold text-foreground">Level & Leak</div>
+            </div>
+            <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Fraud Detection</div>
+              <div className="text-xl font-semibold text-foreground">Secure Dispatch</div>
+            </div>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -76,12 +94,16 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Button size="lg" className="px-8 text-lg glow-primary">
-              Explore System
-            </Button>
-            <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-              View Dashboard
-            </Button>
+            <Link href="#architecture">
+              <Button size="lg" className="px-8 text-lg glow-primary">
+                Explore System
+              </Button>
+            </Link>
+            <Link href="#dashboard">
+              <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground">
+                View Dashboard
+              </Button>
+            </Link>
           </motion.div>
 
           {/* Stats */}
