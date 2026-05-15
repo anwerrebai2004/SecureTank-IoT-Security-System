@@ -106,6 +106,9 @@ export function HeroSection() {
             <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground cursor-pointer" onClick={() => scrollToSection("dashboard")}>
               View Dashboard
             </Button>
+            <Button size="lg" variant="outline" className="px-8 text-lg border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer" onClick={() => scrollToSection("simulation")}>
+              View Demo
+            </Button>
           </motion.div>
 
           {/* Stats */}
