@@ -4,12 +4,18 @@ import { motion } from "framer-motion"
 import { ArrowDown, Radio, Shield, MapPin, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import dynamic from "next/dynamic"
-import Link from "next/link"
 
 const TankerScene = dynamic(
   () => import("@/components/three/tanker-scene").then((mod) => mod.TankerScene),
   { ssr: false }
 )
+
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+}
 
 const stats = [
   { label: "Real-Time Monitoring", value: "24/7", icon: Activity },
@@ -94,16 +100,12 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <Link href="#architecture">
-              <Button size="lg" className="px-8 text-lg glow-primary">
-                Explore System
-              </Button>
-            </Link>
-            <Link href="#dashboard">
-              <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                View Dashboard
-              </Button>
-            </Link>
+            <Button size="lg" className="px-8 text-lg glow-primary cursor-pointer" onClick={() => scrollToSection("architecture")}>
+              Explore System
+            </Button>
+            <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground cursor-pointer" onClick={() => scrollToSection("dashboard")}>
+              View Dashboard
+            </Button>
           </motion.div>
 
           {/* Stats */}
