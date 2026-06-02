@@ -6,6 +6,7 @@ import {
   Cpu, Radio, MapPin, Wifi, Database, Smartphone, 
   HardDrive, Volume2, Power, Shield, ArrowRight, Zap
 } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 const components = [
   {
@@ -147,6 +148,7 @@ function ConnectionLine({ from, to, isActive }: { from: { x: number; y: number }
 export function ArchitectureSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null)
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null)
 
@@ -169,14 +171,13 @@ export function ArchitectureSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent mb-6">
             <Cpu className="h-4 w-4" />
-            <span className="text-sm font-medium">System Architecture</span>
+            <span className="text-sm font-medium">{t("architecture")}</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            Interactive <span className="text-accent text-glow-accent">System Design</span>
+            {t("architectureTitle")} <span className="text-accent text-glow-accent">System Design</span>
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Explore the complete IoT architecture. Click on any component to see detailed 
-            specifications and understand the data flow between sensors and the cloud.
+            {t("architectureSubtitle")}
           </p>
         </motion.div>
 

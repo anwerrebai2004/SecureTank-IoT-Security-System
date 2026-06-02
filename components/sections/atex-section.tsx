@@ -7,6 +7,7 @@ import {
   CheckCircle, XCircle, Info, ChevronRight
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/components/language-provider"
 
 const zones = [
   {
@@ -54,6 +55,7 @@ const prototypeStatus = [
 export function AtexSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
   const [selectedZone, setSelectedZone] = useState(0)
 
   return (
@@ -76,11 +78,10 @@ export function AtexSection() {
             <span className="text-sm font-medium">Safety Standards</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            ATEX <span className="text-destructive">Compliance</span> & Safety
+            {t("atexTitle")}
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Understanding explosive atmosphere requirements and the pathway from 
-            prototype to industrial-grade deployment.
+            {t("atexSubtitle")}
           </p>
         </motion.div>
 
@@ -138,9 +139,9 @@ export function AtexSection() {
               </div>
 
               {/* Zone labels */}
-              <div className="absolute top-4 left-4 text-xs font-mono text-green-500">ZONE 2</div>
-              <div className="absolute top-1/3 left-1/4 text-xs font-mono text-yellow-500">ZONE 1</div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-12 text-xs font-mono text-red-500">ZONE 0</div>
+              <div className="absolute top-4 left-4 text-xs font-mono text-green-500">{t("zone2").split(" ")[0]}</div>
+              <div className="absolute top-1/3 left-1/4 text-xs font-mono text-yellow-500">{t("zone1").split(" ")[0]}</div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-12 text-xs font-mono text-red-500">{t("zone0").split(" ")[0]}</div>
             </div>
 
             {/* Zone selector */}
@@ -207,7 +208,7 @@ export function AtexSection() {
             >
               <div className="flex items-center gap-2 mb-6">
                 <Shield className="h-5 w-5 text-primary" />
-                <h3 className="text-lg font-semibold">Certifications</h3>
+                <h3 className="text-lg font-semibold">{t("cert1").split(" ")[0]} Certifications</h3>
               </div>
               <div className="space-y-3">
                 {certifications.map((cert, i) => (
@@ -247,7 +248,7 @@ export function AtexSection() {
             >
               <div className="flex items-center gap-2 mb-6">
                 <Zap className="h-5 w-5 text-primary" />
-                <h3 className="text-lg font-semibold">Prototype Status</h3>
+                <h3 className="text-lg font-semibold">{t("prototypeStatus")}</h3>
               </div>
               <div className="space-y-3">
                 {prototypeStatus.map((item, i) => (

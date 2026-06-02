@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useLanguage } from "@/components/language-provider";
 import GpsLeafletMap from "../gps-leaflet-map";
 
 // Dynamic import for MiniChart to avoid SSR issues
@@ -598,6 +599,7 @@ function CommandTab({
 
 // Main Dashboard Component
 export function DashboardSection() {
+  const { t } = useLanguage();
   // State
   const [activeTab, setActiveTab] = useState<"dash" | "wire" | "cmd">("dash");
   const [fuel, setFuel] = useState(87.0);

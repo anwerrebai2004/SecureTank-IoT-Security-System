@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Building2, Globe, Award, Users, Truck, Factory, CheckCircle } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 const timeline = [
   { year: "1985", event: "Company Founded", description: "COMET Group established in Algeria" },
@@ -31,6 +32,7 @@ const capabilities = [
 export function CompanySection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
 
   return (
     <section id="company" className="relative py-24 md:py-32 overflow-hidden bg-secondary/20">

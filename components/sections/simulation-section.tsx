@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/components/language-provider"
 
 type SimulationStep = {
   id: number
@@ -177,6 +178,7 @@ function SimulationVisual({ mode, currentStep, fuelLevel }: {
 export function SimulationSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
   const [mode, setMode] = useState<"normal" | "fraud">("normal")
   const [isRunning, setIsRunning] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
@@ -266,11 +268,10 @@ export function SimulationSection() {
             <span className="text-sm font-medium">Interactive Simulation</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            System <span className="text-accent text-glow-accent">Operation</span> Simulation
+            {t("simulationTitle")} <span className="text-accent text-glow-accent">Operation</span>
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Experience the system in action. Switch between normal operation and fraud detection 
-            scenarios to see how our IoT solution responds in real-time.
+            {t("simulationSubtitle")}
           </p>
         </motion.div>
 
@@ -288,7 +289,7 @@ export function SimulationSection() {
             className={cn(mode === "normal" && "glow-primary")}
           >
             <CheckCircle className="mr-2 h-4 w-4" />
-            Normal Operation
+            {t("modeNormal")}
           </Button>
           <Button
             variant={mode === "fraud" ? "destructive" : "outline"}
@@ -297,7 +298,7 @@ export function SimulationSection() {
             className={cn(mode === "fraud" && "glow-destructive")}
           >
             <AlertTriangle className="mr-2 h-4 w-4" />
-            Fraud Scenario
+            {t("modeTheftScenario")}
           </Button>
         </motion.div>
 
@@ -341,7 +342,7 @@ export function SimulationSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="glass rounded-2xl p-6"
           >
-            <h3 className="text-lg font-semibold mb-6">Process Steps</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("step1Title").split(" ")[0]} Steps</h3>
             <div className="space-y-4">
               {steps.map((step, index) => (
                 <motion.div

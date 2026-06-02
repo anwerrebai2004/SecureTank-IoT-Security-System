@@ -3,52 +3,54 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { AlertTriangle, TrendingDown, Eye, MapPinOff, Droplets, Lock } from "lucide-react"
-
-const problems = [
-  {
-    icon: Droplets,
-    title: "Fuel Siphoning",
-    description: "Unauthorized extraction of fuel during transport through tampering with tank valves.",
-    stat: "15-20%",
-    statLabel: "Fuel Loss Rate",
-    color: "destructive",
-  },
-  {
-    icon: Lock,
-    title: "Valve Tampering",
-    description: "Unauthorized opening of tanker valves leading to fuel theft and contamination risks.",
-    stat: "40%",
-    statLabel: "of Theft Cases",
-    color: "warning",
-  },
-  {
-    icon: MapPinOff,
-    title: "Route Deviation",
-    description: "Drivers deviating from planned routes to sell fuel at unauthorized locations.",
-    stat: "25%",
-    statLabel: "Untracked Trips",
-    color: "primary",
-  },
-  {
-    icon: Eye,
-    title: "Lack of Monitoring",
-    description: "No real-time visibility into fuel levels, location, or security status during transport.",
-    stat: "0",
-    statLabel: "Real-Time Data",
-    color: "accent",
-  },
-]
-
-const impactStats = [
-  { value: "$133B", label: "Annual Global Fuel Theft" },
-  { value: "30%", label: "Revenue Loss in Africa" },
-  { value: "72h", label: "Avg. Detection Delay" },
-  { value: "60%", label: "Unresolved Cases" },
-]
+import { useLanguage } from "@/components/language-provider"
 
 export function ProblemSection() {
+  const { t } = useLanguage()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const problems = [
+    {
+      icon: Droplets,
+      titleKey: "theft",
+      descriptionKey: "theftDesc",
+      stat: "15-20%",
+      statLabelKey: "economicLoss",
+      color: "destructive",
+    },
+    {
+      icon: Lock,
+      titleKey: "contamination",
+      descriptionKey: "contaminationDesc",
+      stat: "40%",
+      statLabelKey: "affectedVehicles",
+      color: "warning",
+    },
+    {
+      icon: MapPinOff,
+      titleKey: "tracking",
+      descriptionKey: "trackingDesc",
+      stat: "25%",
+      statLabelKey: "detectionRate",
+      color: "primary",
+    },
+    {
+      icon: Eye,
+      titleKey: "compliance",
+      descriptionKey: "complianceDesc",
+      stat: "0",
+      statLabelKey: "avgResponseTime",
+      color: "accent",
+    },
+  ]
+
+  const impactStats = [
+    { valueKey: "economicLossValue", labelKey: "economicLoss" },
+    { valueKey: "affectedVehiclesValue", labelKey: "affectedVehicles" },
+    { valueKey: "detectionRateValue", labelKey: "detectionRate" },
+    { valueKey: "avgResponseTimeValue", labelKey: "avgResponseTime" },
+  ]
 
   return (
     <section id="problem" className="relative py-24 md:py-32 overflow-hidden">
@@ -71,11 +73,10 @@ export function ProblemSection() {
             <span className="text-sm font-medium">The Industrial Challenge</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            The <span className="text-destructive">Critical Problem</span> in Fuel Transport
+            {t("problemTitle")}
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            The fuel transport industry faces massive losses due to theft, lack of monitoring, 
-            and inadequate security systems. Traditional methods fail to provide real-time protection.
+            {t("problemSubtitle")}
           </p>
         </motion.div>
 
@@ -96,13 +97,13 @@ export function ProblemSection() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold mb-2">{problem.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">{problem.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{t(problem.titleKey)}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{t(problem.descriptionKey)}</p>
 
                 {/* Stat */}
                 <div className="pt-4 border-t border-border">
                   <div className={`text-2xl font-bold text-${problem.color}`}>{problem.stat}</div>
-                  <div className="text-xs text-muted-foreground">{problem.statLabel}</div>
+                  <div className="text-xs text-muted-foreground">{t(problem.statLabelKey)}</div>
                 </div>
 
                 {/* Animated indicator */}
@@ -130,14 +131,14 @@ export function ProblemSection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {impactStats.map((stat, index) => (
               <motion.div
-                key={stat.label}
+                key={stat.labelKey}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">{t(stat.valueKey)}</div>
+                <div className="text-sm text-muted-foreground">{t(stat.labelKey)}</div>
               </motion.div>
             ))}
           </div>

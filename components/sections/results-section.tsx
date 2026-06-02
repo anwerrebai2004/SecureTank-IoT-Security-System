@@ -6,6 +6,7 @@ import {
   CheckCircle, Clock, Target, Zap, 
   TrendingUp, Award, BarChart3, Gauge
 } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 const metrics = [
   {
@@ -62,6 +63,7 @@ const chartData = [
 export function ResultsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
 
   return (
     <section id="results" className="relative py-24 md:py-32 overflow-hidden">
@@ -83,11 +85,10 @@ export function ResultsSection() {
             <span className="text-sm font-medium">Experimental Validation</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            Test <span className="text-primary text-glow-primary">Results</span> & Metrics
+            {t("resultsTitle")}
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Comprehensive testing validates the system&apos;s performance, reliability, and 
-            accuracy across all critical parameters.
+            {t("resultsSubtitle")}
           </p>
         </motion.div>
 
@@ -137,7 +138,7 @@ export function ResultsSection() {
           >
             <div className="flex items-center gap-2 mb-6">
               <BarChart3 className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Test Results Summary</h3>
+              <h3 className="text-lg font-semibold">{t("testsPassed")}</h3>
             </div>
 
             <div className="overflow-x-auto">
@@ -188,7 +189,7 @@ export function ResultsSection() {
           >
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">System Reliability Over Time</h3>
+              <h3 className="text-lg font-semibold">{t("uptimeMetric")}</h3>
             </div>
 
             {/* Simple bar chart */}

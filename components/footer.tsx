@@ -2,23 +2,26 @@
 
 import { motion } from "framer-motion"
 import { Fuel, Github, Linkedin, Mail, ExternalLink } from "lucide-react"
-
-const links = {
-  sections: [
-    { label: "Problem", href: "#problem" },
-    { label: "Architecture", href: "#architecture" },
-    { label: "Dashboard", href: "#dashboard" },
-    { label: "Simulation", href: "#simulation" },
-  ],
-  resources: [
-    { label: "Documentation", href: "#" },
-    { label: "Technical Report", href: "#" },
-    { label: "Research Paper", href: "#" },
-    { label: "GitHub", href: "#" },
-  ],
-}
+import { useLanguage } from "@/components/language-provider"
 
 export function Footer() {
+  const { t } = useLanguage()
+
+  const links = {
+    sections: [
+      { labelKey: "problem", href: "#problem" },
+      { labelKey: "architecture", href: "#architecture" },
+      { labelKey: "dashboard", href: "#dashboard" },
+      { labelKey: "simulation", href: "#simulation" },
+    ],
+    resources: [
+      { labelKey: "footerDocs", href: "#" },
+      { labelKey: "footerPrivacy", href: "#" },
+      { labelKey: "footerContact", href: "#" },
+      { labelKey: "footerTeam", href: "#" },
+    ],
+  }
+
   return (
     <footer className="relative py-16 overflow-hidden border-t border-border">
       {/* Background */}
@@ -33,14 +36,12 @@ export function Footer() {
                 <Fuel className="h-5 w-5 text-primary-foreground" />
               </div>
               <div>
-                <div className="font-bold text-lg">SecureTank IoT</div>
-                <div className="text-xs text-muted-foreground">Intelligent Security System</div>
+                <div className="font-bold text-lg">{t("footerBrand")}</div>
+                <div className="text-xs text-muted-foreground">{t("footerTagline")}</div>
               </div>
             </div>
             <p className="text-muted-foreground text-sm max-w-md mb-6">
-              An innovative IoT-based fuel transport and tanker security system developed 
-              as a final year engineering project. Real-time monitoring, fraud detection, 
-              and GPS tracking for the modern logistics industry.
+              {t("footerAbout")}
             </p>
             <div className="flex items-center gap-4">
               <a 
@@ -69,15 +70,15 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Sections</h4>
+            <h4 className="font-semibold mb-4">{t("footerQuickLinks")}</h4>
             <ul className="space-y-2">
               {links.sections.map(link => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <a 
                     href={link.href}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </a>
                 </li>
               ))}
@@ -86,15 +87,15 @@ export function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
+            <h4 className="font-semibold mb-4">{t("footerLegal")}</h4>
             <ul className="space-y-2">
               {links.resources.map(link => (
-                <li key={link.label}>
+                <li key={link.labelKey}>
                   <a 
                     href={link.href}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                     <ExternalLink className="h-3 w-3" />
                   </a>
                 </li>
@@ -106,12 +107,10 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-sm text-muted-foreground text-center md:text-left">
-            <span>Engineering Final Year Project (PFE) 2024</span>
-            <span className="mx-2">|</span>
-            <span>COMET Group Partnership</span>
+            {t("footerCopyright")}
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span>Built with Next.js, Three.js & Framer Motion</span>
+            <span>{t("footerLocation")}</span>
           </div>
         </div>
 

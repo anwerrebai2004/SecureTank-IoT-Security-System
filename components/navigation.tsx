@@ -4,21 +4,24 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Fuel, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useLanguage } from "@/components/language-provider"
 import { cn } from "@/lib/utils"
 
-const navItems = [
-  { label: "Problem", href: "#problem" },
-  { label: "Company", href: "#company" },
-  { label: "Architecture", href: "#architecture" },
-  { label: "Dashboard", href: "#dashboard" },
-  { label: "Simulation", href: "#simulation" },
-  { label: "ATEX Safety", href: "#atex" },
-  { label: "Results", href: "#results" },
-]
-
 export function Navigation() {
+  const { t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navItems = [
+    { label: t("problem"), href: "#problem" },
+    { label: t("company"), href: "#company" },
+    { label: t("architecture"), href: "#architecture" },
+    { label: t("dashboard"), href: "#dashboard" },
+    { label: t("simulation"), href: "#simulation" },
+    { label: t("atexSafety"), href: "#atex" },
+    { label: t("results"), href: "#results" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,9 +76,10 @@ export function Navigation() {
             </nav>
 
             {/* CTA & Mobile Menu Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <LanguageSwitcher />
               <Button className="hidden sm:inline-flex glow-primary" size="sm">
-                View Demo
+                {t("viewDemo")}
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
               <button
@@ -121,10 +125,11 @@ export function Navigation() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="mt-4"
+                className="mt-4 space-y-3"
               >
+                <LanguageSwitcher />
                 <Button className="w-full glow-primary" size="lg">
-                  View Demo
+                  {t("viewDemo")}
                   <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
               </motion.div>

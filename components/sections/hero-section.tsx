@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowDown, Radio, Shield, MapPin, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/components/language-provider"
 import dynamic from "next/dynamic"
 
 const TankerScene = dynamic(
@@ -17,14 +18,16 @@ const scrollToSection = (id: string) => {
   }
 }
 
-const stats = [
-  { label: "Real-Time Monitoring", value: "24/7", icon: Activity },
-  { label: "GPS Accuracy", value: "<5m", icon: MapPin },
-  { label: "Fraud Detection", value: "99.9%", icon: Shield },
-  { label: "IoT Sensors", value: "6+", icon: Radio },
-]
-
 export function HeroSection() {
+  const { t } = useLanguage()
+
+  const stats = [
+    { label: t("monitoring"), value: t("monitoringValue"), icon: Activity },
+    { label: t("gpsAccuracy"), value: t("gpsAccuracyValue"), icon: MapPin },
+    { label: t("fraudDetectionRate"), value: t("fraudDetectionValue"), icon: Shield },
+    { label: t("iotSensors"), value: t("iotSensorsValue"), icon: Radio },
+  ]
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
@@ -49,7 +52,7 @@ export function HeroSection() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
             </span>
-            <span className="text-sm font-medium text-primary">Engineering Final Year Project</span>
+            <span className="text-sm font-medium text-primary">{t("badge")}</span>
           </motion.div>
 
           {/* Title */}
@@ -59,7 +62,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.0] text-foreground text-glow-primary"
           >
-            Intelligent IoT-Based Fuel Transport Security
+            {t("heroTitle")}
           </motion.h1>
 
           {/* Subtitle */}
@@ -69,8 +72,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-8"
           >
-            Real-time monitoring, fraud detection, and GPS tracking for modern fuel transport.
-            Securing every drop from origin to destination.
+            {t("heroSubtitle")}
           </motion.p>
 
           <motion.div
@@ -80,16 +82,16 @@ export function HeroSection() {
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
           >
             <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
-              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">GPS Tracking</div>
-              <div className="text-xl font-semibold text-foreground">Location Lock</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">{t("gpsTracking")}</div>
+              <div className="text-xl font-semibold text-foreground">{t("locationLock")}</div>
             </div>
             <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
-              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Fuel Monitoring</div>
-              <div className="text-xl font-semibold text-foreground">Level & Leak</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">{t("fuelMonitoring")}</div>
+              <div className="text-xl font-semibold text-foreground">{t("levelLeak")}</div>
             </div>
             <div className="glass-card rounded-3xl p-4 border-cyan-400/20">
-              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">Fraud Detection</div>
-              <div className="text-xl font-semibold text-foreground">Secure Dispatch</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">{t("fraudDetection")}</div>
+              <div className="text-xl font-semibold text-foreground">{t("secureDispatch")}</div>
             </div>
           </motion.div>
 
@@ -101,13 +103,13 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Button size="lg" className="px-8 text-lg glow-primary cursor-pointer" onClick={() => scrollToSection("architecture")}>
-              Explore System
+              {t("exploreSystem")}
             </Button>
             <Button size="lg" variant="outline" className="px-8 text-lg border-accent text-accent hover:bg-accent hover:text-accent-foreground cursor-pointer" onClick={() => scrollToSection("dashboard")}>
-              View Dashboard
+              {t("viewDashboard")}
             </Button>
             <Button size="lg" variant="outline" className="px-8 text-lg border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer" onClick={() => scrollToSection("simulation")}>
-              View Demo
+              {t("viewDemo")}
             </Button>
           </motion.div>
 

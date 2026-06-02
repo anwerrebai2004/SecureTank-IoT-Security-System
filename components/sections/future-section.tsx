@@ -6,6 +6,7 @@ import {
   Brain, Cloud, Truck, Factory, Sparkles,
   LineChart, Shield, Globe, Cpu, Network
 } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 const perspectives = [
   {
@@ -63,6 +64,7 @@ const roadmap = [
 export function FutureSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { t } = useLanguage()
 
   return (
     <section id="future" className="relative py-24 md:py-32 overflow-hidden bg-secondary/10">
@@ -85,11 +87,10 @@ export function FutureSection() {
             <span className="text-sm font-medium">Future Vision</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            Future <span className="text-accent text-glow-accent">Perspectives</span>
+            {t("futureTitle")}
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            The evolution of our IoT security system into a comprehensive industrial 
-            platform with AI capabilities and full ATEX compliance.
+            {t("futureSubtitle")}
           </p>
         </motion.div>
 
@@ -148,7 +149,7 @@ export function FutureSection() {
         >
           <div className="flex items-center gap-2 mb-8 justify-center">
             <Globe className="h-6 w-6 text-primary" />
-            <h3 className="text-xl font-semibold">Development Roadmap</h3>
+            <h3 className="text-xl font-semibold">{t("futureTitle").split(" ")[0]} Roadmap</h3>
           </div>
 
           <div className="relative">
